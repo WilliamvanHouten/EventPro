@@ -135,6 +135,78 @@
   --bs-form-invalid-border-color: #dc3545;
 }
 
+* searchbar css */
+.searchbar{
+  margin-bottom: auto;
+  margin-top: auto;
+  height: 60px;
+  background-color: #000000;
+  border-radius: 30px;
+  padding: 10px;
+  }
+
+  .search_input{
+  color: white;
+  border: 1px;
+  border-color: rgba(255, 0, 174, 0.732) ;
+  outline: 0;
+  background: none;
+  width: 0;
+  caret-color:transparent;
+  line-height: 40px;
+  transition: width 0.4s linear;
+  
+  }
+
+  .searchbar:hover > .search_input{
+  padding: 0 10px;
+  width: 450px;
+  caret-color:rgba(255, 0, 174, 0.732);
+  transition: width 0.4s linear;
+  
+  }
+
+  .searchbar:hover > .search_icon{
+  background: white;
+  color: rgba(255, 0, 174, 0.732);
+  }
+
+  .search_icon{
+  height: 40px;
+  width: 40px;
+  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color:white;
+  text-decoration:none;
+  }
+  /* searchbar css end */
+
+  .team {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .team-desc {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #ffffff;
+    padding: 10px;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s;
+  }
+
+  .team:hover .team-desc {
+    visibility: visible;
+    opacity: 1;
+  }
+
 [data-bs-theme=dark] {
   color-scheme: dark;
   --bs-body-color: #adb5bd;
