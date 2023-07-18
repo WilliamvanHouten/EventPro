@@ -1542,33 +1542,26 @@
     </script>
 
     <script>
-      jQuery(document).ready(function () {
-        // Ticket Price Changed Script
-        var elementEarlyBird = jQuery("#early-bird-person"),
-          element1Day = jQuery("#1-day-pricing-person"),
-          element2Day = jQuery("#2-day-pricing-person"),
-          elementFull = jQuery("#full-pricing-person");
+       // Wait for the document to be ready
+  document.addEventListener("DOMContentLoaded", function () {
+    // Ticket Price Changed Script
 
-        elementEarlyBird.on("change", function () {
-          pricingEarlyBird = jQuery(this).prop("value");
-          jQuery(".early-bird-pricing").html("R" + pricingEarlyBird * 380);
-        });
-
-        element1Day.on("change", function () {
-          pricing1day = jQuery(this).prop("value");
-          jQuery(".1-day-pricing").html("R" + pricing1day * 250);
-        });
-
-        element2Day.on("change", function () {
-          pricing2Day = jQuery(this).prop("value");
-          jQuery(".2-day-pricing").html("R" + pricing2Day * 600);
-        });
-
-        elementFull.on("change", function () {
-          pricingFull = jQuery(this).prop("value");
-          jQuery(".full-pricing").html("R" + pricingFull * 300);
-        });
+    // Function to update pricing based on selection
+    function updatePricing(elementSelector, priceClass, multiplier) {
+      var element = document.querySelector(elementSelector);
+      element.addEventListener("change", function () {
+        var selectedValue = parseInt(element.value);
+        var priceElement = document.querySelector(priceClass);
+        priceElement.textContent = "R" + selectedValue * multiplier;
       });
+    }
+
+    // Bind event handlers for each pricing element
+    updatePricing("#early-bird-person", ".early-bird-pricing", 380);
+    updatePricing("#1-day-pricing-person", ".1-day-pricing", 250);
+    updatePricing("#2-day-pricing-person", ".2-day-pricing", 600);
+    updatePricing("#full-pricing-person", ".full-pricing", 300);
+  });
     </script>
   </body>
 </html>
