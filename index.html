@@ -1542,21 +1542,22 @@
     </script>
 
     <script>
-       // Wait for the document to be ready
+    // Wait for the document to be ready
   document.addEventListener("DOMContentLoaded", function () {
     // Ticket Price Changed Script
 
     // Function to update pricing based on selection
-    function updatePricing(elementSelector, priceClass, multiplier) {
+    function updatePricing(elementSelector, priceClass, basePrice) {
       var element = document.querySelector(elementSelector);
       element.addEventListener("change", function () {
         var selectedValue = parseInt(element.value);
         var priceElement = document.querySelector(priceClass);
-        priceElement.textContent = "R" + selectedValue * multiplier;
+        var totalPrice = basePrice * selectedValue;
+        priceElement.textContent = "R" + totalPrice;
       });
     }
 
-    // Bind event handlers for each pricing element
+    // Bind event handlers for each pricing element with the corresponding base prices
     updatePricing("#early-bird-person", ".early-bird-pricing", 380);
     updatePricing("#1-day-pricing-person", ".1-day-pricing", 250);
     updatePricing("#2-day-pricing-person", ".2-day-pricing", 600);
