@@ -1,65 +1,149 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-<link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
-<link rel="stylesheet" href="signup.css">
-<title>Registration form</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <link rel="stylesheet" href="paymentform.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
 </head>
 <body>
-<div class="section">
- <div class="container">
-	<div class="row full-height justify-content-center">
-		<div class="col-12 text-center align-self-center py-5">
-			<div class="section pb-5 pt-5 pt-sm-2 text-center">
-				<h6 class="mb-0 pb-3"><span>Sign In </span><span>Sign Up</span></h6>
-				<input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
-				<label for="reg-log"></label>
-			<div class="card-3d-wrap mx-auto">
-					<div class="card-3d-wrapper">
-						<div class="card-front">
-							<div class="center-wrap">
-								<div class="section text-center">
-									<h4 class="mb-4 pb-3">Sign In</h4>
-									<div class="form-group">
-										<input type="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off">
-										<i class="input-icon uil uil-at"></i>
-									</div>	
-									<div class="form-group mt-2">
-										<input type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
-										<i class="input-icon uil uil-lock-alt"></i>
-									</div>
-									<a href="landingpage.html" class="btn mt-4">submit</a>
-									<p class="mb-0 mt-4 text-center"><a href="#0" class="link">Forgot your password?</a></p>
-								</div>
-							</div>
-						</div>
-						<div class="card-back">
-							<div class="center-wrap">
-								<div class="section text-center">
-									<h4 class="mb-4 pb-3">Sign Up</h4>
-									<div class="form-group">
-										<input type="text" name="logname" class="form-style" placeholder="Your Full Name" id="logname" autocomplete="off">
-										<i class="input-icon uil uil-user"></i>
-									</div>	
-									<div class="form-group mt-2">
-										<input type="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off">
-										<i class="input-icon uil uil-at"></i>
-									</div>	
-									<div class="form-group mt-2">
-										<input type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
-										<i class="input-icon uil uil-lock-alt"></i>
-									</div>
-									<a href="landingpage.html" class="btn mt-4">submit</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-</div>
+    <div class="container">
+        <h6>Checkout</h6>
+        <span class="close-1">&times;</span>
+        <h1 class="payment">Payment Method</h1>
+        <form action="">
+            <label for="country">Country
+                <select name="country" id="country">
+                    <option value="South Africa">South Africa</option>
+                    <option value="Mozambique">Mozambique</option>
+                    <option value="Zambia">Zambia</option>
+                </select>
+            </label> 
+            <label for="cardholder">Cardholder Name
+                <input type="text" name="cardholder" id="cardholder" />
+              </label>
+            <label for="cardno">Card Number
+                <input type="text" name="cardno" id="cardno" maxlength="19" oninput="formatCardNumber()" />
+            </label>
+            <div class="float">
+                <label for="validtill">Valid till
+                    <input type="text" name="validtill" id="validtill" maxlength="7" oninput="formatExpirationDate()" />
+                </label>
+                <label for="cvv">CVV
+                    <input type="text" name="cvv" id="cvv" maxlength="3" />
+                </label>
+            </div>
+            <label for="checkbox">
+                <input type="checkbox" name="checkbox" id="checkbox" />
+                <p class="address">Payment Address is the same as the Delivery Address</p>
+            </label>
+            <br>
+            <button id="payButton" class="btn btn-primary">Pay Now</button>
+        </form>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmationModalLabel">Payment Confirmation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Your purchase was successful!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+    // Format Card Number
+    function formatCardNumber() {
+            let cardNumberInput = document.getElementById('cardno');
+            let cardNumberValue = cardNumberInput.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+            let formattedCardNumber = '';
+
+            if (cardNumberValue.length > 0) {
+                formattedCardNumber = cardNumberValue.match(/.{1,4}/g).join(' ');
+            }
+
+            cardNumberInput.value = formattedCardNumber;
+        }
+
+        // Format Expiration Date
+        function formatExpirationDate() {
+            let validTillInput = document.getElementById('validtill');
+            let validTillValue = validTillInput.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+            let formattedValidTill = '';
+
+            if (validTillValue.length > 0) {
+                formattedValidTill = validTillValue.match(/.{1,2}/g).join('/');
+            }
+
+            validTillInput.value = formattedValidTill;
+        }
+
+        // Validate Cardholder Name
+        function validateCardholderName() {
+            let cardholderInput = document.getElementById('cardholder');
+            let cardholderValue = cardholderInput.value.trim();
+            let cardholderRegex = /^[a-zA-Z\s]+$/;
+
+            if (!cardholderRegex.test(cardholderValue)) {
+                cardholderInput.setCustomValidity('Please enter a valid cardholder name.');
+            } else {
+                cardholderInput.setCustomValidity('');
+            }
+        }
+
+        // Validate Form
+        function validateForm() {
+            let form = document.querySelector('form');
+            let isValid = form.checkValidity();
+            form.classList.add('was-validated');
+            return isValid;
+        }
+
+        // Enable/Disable Payment Button
+        function togglePaymentButton() {
+            let payButton = document.getElementById('payButton');
+            let isValid = validateForm();
+            payButton.disabled = !isValid;
+        }
+
+        // Show Confirmation Modal
+        function showConfirmationModal() {
+            $('#confirmationModal').modal('show');
+        }
+            // Close Confirmation Modal
+                function closeConfirmationModal() {
+             $('#confirmationModal').modal('hide');
+    }
+        // Event Listeners
+        document.getElementById('cardno').addEventListener('input', formatCardNumber);
+        document.getElementById('validtill').addEventListener('input', formatExpirationDate);
+        document.getElementById('cardholder').addEventListener('input', validateCardholderName);
+        document.querySelector('form').addEventListener('input', togglePaymentButton);
+        document.querySelector('form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            if (validateForm()) {
+                showConfirmationModal();
+            }
+        });
+
+    </script>
 </body>
 </html>
