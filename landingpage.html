@@ -34,6 +34,13 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/custom.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+	  
+   <!-- style for smooth scrolling for searchbar	   -->
+	  <style>
+		  html {
+    scroll-behavior: smooth;
+    }
+	  </style>
 
     <!-- Document Title
 	============================================= -->
@@ -233,6 +240,13 @@
             </div>
           </div>
 		 <div class="result-box">
+			 <ul>
+            <li><a href="#free-events"></a>
+                <li><a href="#paid-events"></a>
+
+                </li>
+            </li>
+        </ul>
   </div>
 <br><br><br>
 	
@@ -644,7 +658,7 @@
             </div>
 
             <div class="position-relative">
-              <div class="container">
+              <div class="container" id="paid-events">
                 <div class="row pricing align-items-center">
                   <div class="col-lg-3 col-sm-6">
                     <div class="pricing-box text-center">
@@ -814,8 +828,9 @@
 						  </h3>
 						  <span>11 August 2023- 15:00-17:00</span>
 						</div>
+						  
 						<div
-						  class="pricing-price early-bird-pricing font-primary fw-bold"
+						  class="pricing-price early-bird-pricing font-primary fw-bold" id="free-events"
 						>
 						  <span class="price-unit">Free to join</span>
 						</div>
@@ -1583,6 +1598,7 @@
     <script>
       !SEMICOLON.Mobile.any() && skrollr.init({ forceHeight: false });
     </script>
+    <script src="searchbar.js"></script>
 
     <script>
    // Define TicketPricing class
