@@ -6,9 +6,6 @@ class EventFilter {
     this.inputBox = document.getElementById("input-box");
     this.inputBox.addEventListener("keyup", this.handleInput.bind(this));
     this.resultsBox.style.display = "none"; // Hide the results box initially
-
-    // Add a click event listener to the resultsBox to handle clicks on keywords
-    this.resultsBox.addEventListener("click", this.handleResultClick.bind(this));
   }
 
   handleInput() {
@@ -34,15 +31,40 @@ class EventFilter {
       return `<li><a href="#${list.toLowerCase().replace(/\s/g, "-")}">${list}</a></li>`;
     });
 
-    this.resultsBox.innerHTML = "<ul>" + content.join("") + "</ul>";
+    this.resultsBox.innerHTML = `<ul>${content.join("")}</ul>`;
   }
 
-  handleResultClick(event) {
-    const clickedKeyword = event.target.textContent;
-    this.inputBox.value = clickedKeyword;
+  selectInput(list) {
+    this.inputBox.value = list.innerHTML;
     this.resultsBox.style.display = "none"; // Hide the results box after selection
   }
 }
 
 const availableKeywords = ["Paid events", "Free events"];
 const eventFilter = new EventFilter(availableKeywords);
+
+// Add a click event listener to the resultsBox to handle clicks on keywords
+eventFilter.resultsBox.addEventListener("click", event => {
+  if (event.target.tagName === "A") {
+    event.preventDefault(); // Prevent the default anchor link behavior
+    const clickedKeyword = event.target.textContent;
+    eventFilter.inputBox.value = clickedKeyword;
+    eventFilter.resultsBox.style.display = "none"; // Hide the results box after selection
+    const sectionId = clickedKeyword.toLowerCase().replace(/\s/g, "-");
+    scrollToSection(sectionId); // Scroll to the designated section
+  }
+});
+
+// Function to scroll to the designated section
+function scrollToSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  if (section) {
+    const headerOffset = 100; // Adjust this value based on your header height
+    const elementPosition = section.getBoundingClientRect().top;
+    const offsetPosition = elementPosition - headerOffset;
+    window.scrollBy({
+      top: offsetPosition,
+      behavior: "smooth"
+    });
+  }
+}
