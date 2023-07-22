@@ -27,14 +27,14 @@ class EventFilter {
 
   display(results) {
     const content = results.map(list => {
-      return "<li onclick='this.selectInput(this)'>" + list + "</li>";
+      return `<li><a href="#${list.toLowerCase().replace(/\s/g, "-")}">${list}</a></li>`;
     });
 
     this.resultsBox.innerHTML = "<ul>" + content.join("") + "</ul>";
   }
 
   selectInput(list) {
-    this.inputBox.value = list.innerHTML;
+    this.inputBox.value = list.textContent;
     this.resultsBox.style.display = "none"; // Hide the results box after selection
   }
 }
