@@ -1,4 +1,4 @@
- class EventFilter {
+class EventFilter {
   constructor(availableKeywords) {
     this.availableKeywords = availableKeywords;
     this.resultsBox = document.querySelector(".result-box");
