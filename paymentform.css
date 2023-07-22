@@ -55,10 +55,10 @@
   }
   
   form label {
-    color:skyblue;
+    color:#15133C;
     text-transform: uppercase;
     position: relative;
-    font-size: 10px;
+    font-size: 11px;
     word-spacing: 4px;
   }
   
@@ -86,7 +86,7 @@
     padding-top: 5px;
     margin-bottom: 20px;
     padding-right: 30px;
-    color: skyblue;
+    color:#15133C;
     font-size: 18px;
     background-color: transparent;
     padding-bottom: 5px;
