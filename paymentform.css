@@ -125,7 +125,8 @@ background-color:#fc8b0b;
 #validtill,
 #cvv {
   border: none;
-  border-bottom: 2px solid orangered;
+  border-bottom: 2px solid hsl(326, 91%, 50%);
+}
   outline: none;
   width: 130px;
   padding-top: 14px;
