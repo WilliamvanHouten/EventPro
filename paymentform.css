@@ -32,7 +32,8 @@ button.btn.btn-primary {
   outline: none;
   text-align: center;
   height: 40px;
-  background:#15133C;
+  background:hsl(326, 91%, 50%);
+}
   color: #fff;
   padding: 10px;
   font-weight: bold;
@@ -65,7 +66,8 @@ form select {
   width: 100%;
   outline: none;
   border: none;
-  border-bottom: 2px solid orangered;
+  border-bottom: 2px solid hsl(326, 91%, 50%);
+}
   text-transform: capitalize;
   padding-top: 3px;
   color: var(--text-color);
@@ -81,7 +83,8 @@ form #cardholder {
   width: 100%;
   outline: none;
   border: none;
-  border-bottom: 2px solid orangered;
+  border-bottom: 2px solid hsl(326, 91%, 50%);
+}
   padding-top: 5px;
   margin-bottom: 20px;
   padding-right: 30px;
