@@ -33,10 +33,10 @@ button.btn.btn-primary {
   text-align: center;
   height: 40px;
   background:hsl(326, 91%, 50%);
-}
   color: #fff;
   padding: 10px;
   font-weight: bold;
+  border-radius:16px;
  
 }
 
