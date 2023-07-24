@@ -1,3 +1,48 @@
+// Define TicketPricing class
+  class TicketPricing {
+    constructor(basePrice) {
+      this.basePrice = basePrice;
+    }
+
+    updatePrice(element) {
+      const selectedValue = parseInt(element.value);
+      const priceElement = element.closest(".pricing-box").querySelector(".pricing-price");
+      const totalPrice = this.basePrice * selectedValue;
+      priceElement.textContent = "R" + totalPrice;
+    }
+  }
+
+  // Wait for the document to be ready
+  document.addEventListener("DOMContentLoaded", function () {
+    // Create instances of TicketPricing for each ticket option
+    const earlyBirdPricing = new TicketPricing(380);
+    const oneDayPricing = new TicketPricing(250);
+    const twoDayPricing = new TicketPricing(600);
+    const fullPricing = new TicketPricing(300);
+
+    // Bind event handlers for each pricing element
+    document.querySelectorAll(".required.form-select").forEach((element) => {
+      element.addEventListener("change", function () {
+        switch (element.id) {
+          case "early-bird-person":
+            earlyBirdPricing.updatePrice(element);
+            break;
+          case "1-day-pricing-person":
+            oneDayPricing.updatePrice(element);
+            break;
+          case "2-day-pricing-person":
+            twoDayPricing.updatePrice(element);
+            break;
+          case "full-pricing-person":
+            fullPricing.updatePrice(element);
+            break;
+          default:
+            break;
+        }
+      });
+    });
+  });
+
 // Function to handle the "Buy Ticket" button click
   function handleButtonClick(event) {
     const selectedEvent = event.target.dataset.event; // Get the selected event details from the data-event attribute
