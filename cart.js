@@ -1,53 +1,33 @@
-// Wait for the document to be ready
-document.addEventListener("DOMContentLoaded", function () {
-  const cartItems = []; // To store selected events and prices
+function redirectToPayment(eventId) {
+    // Get the event name and price based on the selected event
+    let eventName = "";
+    let price = 0;
 
-  // Function to display cart items on the cart page
-  function displayCartItems() {
-    const cartItemsDiv = document.getElementById("cart-items");
-    cartItemsDiv.innerHTML = ""; // Clear the previous content
-
-    if (cartItems.length === 0) {
-      cartItemsDiv.innerHTML = "<p>No items in the cart.</p>";
-    } else {
-      cartItems.forEach((item) => {
-        const itemDiv = document.createElement("div");
-        itemDiv.innerHTML = `<p><strong>Event:</strong> ${item.eventName}</p><p><strong>Price:</strong> R${item.eventPrice}</p><hr>`;
-        cartItemsDiv.appendChild(itemDiv);
-      });
+    switch (eventId) {
+      case 1:
+        eventName = "AI and Machine Learning Webinar-Sandton Convention Centre with Takalani Madzhadzhi";
+        price = 380;
+        break;
+      case 2:
+        eventName = "Digital Marketing Webinar-Protea by Marriot Hotel-Cape Town Waterfront with Mike Saunders";
+        price = 250;
+        break;
+      case 3:
+        eventName = "Your Crafting Hands as a Business Expo-Imbizo Conference Centre-Durban (Marisa Fick-Jordan), 9 (Alex Goldberg), 10 (Annabell Lebethe)";
+        price = 600;
+        break;
+      case 4:
+        eventName = "Color and Interior Design Expo-Birchwood Hotel with Nthabi Taukobong- OR Tambo International Airport";
+        price = 300;
+        break;
+      default:
+        eventName = "Unknown Event";
+        price = 0;
     }
+
+    // Redirect to paymentform.html with the event info in the URL
+    window.location.href = `paymentform.html?event=${encodeURIComponent(eventName)}&price=${price}`;
   }
-
-  // Function to handle "Buy Ticket" button click event for paid events
-  function handleBuyTicketClick(event) {
-    const pricingBox = event.target.closest(".pricing-box");
-    const eventName = pricingBox.querySelector(".pricing-title h3").textContent;
-    const eventPrice = pricingBox.querySelector(".pricing-price").textContent;
-
-    cartItems.push({ eventName, eventPrice });
-    displayCartItems();
-  }
-
-  // Function to handle "Book a Seat" button click event for free events
-  function handleBookSeatClick(event) {
-    const pricingBox = event.target.closest(".pricing-box");
-    const eventName = pricingBox.querySelector(".pricing-title h3").textContent;
-    const eventPrice = pricingBox.querySelector(".pricing-price").textContent;
-
-    cartItems.push({ eventName, eventPrice });
-    displayCartItems();
-  }
-
-  // Attach event listeners to the "Buy Ticket" buttons for each paid event
-  document.querySelectorAll("#paid-events .pricing-action a.button").forEach((button) => {
-    button.addEventListener("click", handleBuyTicketClick);
-  });
-
-  // Attach event listeners to the "Book a Seat" buttons for each free event
-  document.querySelectorAll("#free-events .pricing-action a.button").forEach((button) => {
-    button.addEventListener("click", handleBookSeatClick);
-  });
-});
 
 // Format Card Number
         function formatCardNumber() {
