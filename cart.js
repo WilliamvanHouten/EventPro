@@ -1,39 +1,38 @@
-function redirectToPayment(eventId) {
-    // Get the event name and price based on the selected event
+function storeEventInfo(eventId) {
     let eventName = "";
-    let price = 0;
+    let eventPrice = 0;
 
     switch (eventId) {
       case 1:
         eventName = "AI and Machine Learning Webinar-Sandton Convention Centre with Takalani Madzhadzhi";
-        price = 380;
+        eventPrice = 380;
         break;
       case 2:
         eventName = "Digital Marketing Webinar-Protea by Marriot Hotel-Cape Town Waterfront with Mike Saunders";
-        price = 250;
+        eventPrice = 250;
         break;
       case 3:
         eventName = "Your Crafting Hands as a Business Expo-Imbizo Conference Centre-Durban (Marisa Fick-Jordan), 9 (Alex Goldberg), 10 (Annabell Lebethe)";
-        price = 600;
+        eventPrice = 600;
         break;
       case 4:
         eventName = "Color and Interior Design Expo-Birchwood Hotel with Nthabi Taukobong- OR Tambo International Airport";
-        price = 300;
+        eventPrice = 300;
         break;
       default:
         eventName = "Unknown Event";
-        price = 0;
+        eventPrice = 0;
     }
 
-    // Redirect to paymentform.html with the event info in the URL
-    window.location.href = `paymentform.html?event=${encodeURIComponent(eventName)}&price=${price}`;
+    // Store the selected event information in localStorage
+    localStorage.setItem("selectedEventName", eventName);
+    localStorage.setItem("selectedEventPrice", eventPrice);
   }
 
 // Function to parse and display event info from the URL parameters
   function displayEventInfo() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const eventName = urlParams.get("event");
-    const eventPrice = urlParams.get("price");
+    const eventName = localStorage.getItem("selectedEventName");
+    const eventPrice = localStorage.getItem("selectedEventPrice");
 
     const cartItemsContainer = document.getElementById("cart-items");
 
