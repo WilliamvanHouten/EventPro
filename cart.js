@@ -12,7 +12,8 @@
     }
 
     addClickEvent() {
-      this.element.addEventListener('click', () => {
+      this.element.addEventListener('click', (event) => {
+        event.preventDefault(); // Prevent default link behavior
         // Increment the ticket count and update the text
         this.ticketCount++;
         this.updateTicketCount();
