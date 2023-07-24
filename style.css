@@ -134,37 +134,38 @@
   --bs-form-invalid-color: #dc3545;
   --bs-form-invalid-border-color: #dc3545;
 }
-.cartButton{  
-    border-radius: 4px;
-    height: 44px;
-    font-size: 13px;
-    font-weight: 600;
-    text-transform: uppercase;
-    transition: all 200ms linear;
-    padding: 0 30px;
-    letter-spacing: 1px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    -ms-flex-pack: center;
-    text-align: center;
-    border: none;
-    background-color: #ffff;
-    color: #15133C;
-    box-shadow: 0 10px 30px 0 rgba(248, 18, 179, 0.2);
-}
-.cartButton:active,
-.cartButton:focus{  
-  background-color: hsl(326, 91%, 50%);
-  ;
-  color: #15133C;
-  box-shadow: 0 8px 24px 0 hsl(326, 91%, 50%);
-}
-.cartButton:hover{  
-  background-color: #000000;
-  color:hsl(326, 91%, 50%);
-  box-shadow: 0 8px 24px 50px 10px rgba(212, 5, 150, 0.2);
-}
+.cartButton {  
+      border-radius: 4px;
+      height: 44px;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      transition: all 200ms linear;
+      padding: 0 30px;
+      letter-spacing: 1px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      -ms-flex-pack: center;
+      text-align: center;
+      border: none;
+      background-color: #ffff;
+      color: #15133C;
+      box-shadow: 0 10px 30px 0 rgba(248, 18, 179, 0.2);
+    }
+
+    .cartButton:active,
+    .cartButton:focus {
+      background-color: hsl(326, 91%, 50%);
+      color: #15133C;
+      box-shadow: 0 8px 24px 0 hsl(326, 91%, 50%);
+    }
+
+    .cartButton:hover {
+      background-color: #000000;
+      color: hsl(326, 91%, 50%);
+      box-shadow: 0 8px 24px 50px 10px rgba(212, 5, 150, 0.2);
+    }
 
 * searchbar css */
 .searchbar{
