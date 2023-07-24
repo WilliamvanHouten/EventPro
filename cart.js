@@ -1,42 +1,38 @@
-function addToCart(eventTitle, eventPrice) {
-    const cartContent = document.getElementById('cart-content');
+document.addEventListener('DOMContentLoaded', function () {
+    // Function to add event info to cart
+    function addToCart(eventTitle, eventPrice) {
+      const cartContent = document.getElementById('cart-content');
 
-    // Create a new div element to hold the event information
-    const eventInfo = document.createElement('div');
-    eventInfo.classList.add('event-info');
+      // Create a new div element to hold the event information
+      const eventInfo = document.createElement('div');
+      eventInfo.classList.add('event-info');
 
-    // Add the event title and price to the eventInfo div
-    const titleElement = document.createElement('h2');
-    titleElement.innerText = eventTitle;
+      // Add the event title and price to the eventInfo div
+      const titleElement = document.createElement('h2');
+      titleElement.innerText = eventTitle;
 
-    const priceElement = document.createElement('p');
-    priceElement.innerText = 'Price: ' + eventPrice;
+      const priceElement = document.createElement('p');
+      priceElement.innerText = 'Price: ' + eventPrice;
 
-    eventInfo.appendChild(titleElement);
-    eventInfo.appendChild(priceElement);
+      eventInfo.appendChild(titleElement);
+      eventInfo.appendChild(priceElement);
 
-    // Append the eventInfo to the cartContent div
-    cartContent.appendChild(eventInfo);
-  }
+      // Append the eventInfo to the cartContent div
+      cartContent.appendChild(eventInfo);
+    }
 
-  // Add event listeners to Buy Ticket buttons
-  const buyTicketButtons = document.querySelectorAll('.pricing-action button');
-  buyTicketButtons.forEach((button) => {
-    button.addEventListener('click', function () {
-      const eventTitle = this.parentNode.parentNode.querySelector('.pricing-title h3').innerText;
-      const eventPrice = this.parentNode.parentNode.querySelector('.pricing-price').innerText;
-      addToCart(eventTitle, eventPrice);
-    });
-  });
+    // Function to handle click events on Buy Ticket and Book a Seat buttons
+    function handleButtonClick(event) {
+      if (event.target.matches('.button-gradient')) {
+        const eventBox = event.target.closest('.pricing-box');
+        const eventTitle = eventBox.querySelector('.pricing-title h3').innerText;
+        const eventPrice = eventBox.querySelector('.pricing-price').innerText;
+        addToCart(eventTitle, eventPrice);
+      }
+    }
 
-  // Add event listeners to Book a Seat buttons
-  const bookSeatButtons = document.querySelectorAll('.pricing-action button');
-  bookSeatButtons.forEach((button) => {
-    button.addEventListener('click', function () {
-      const eventTitle = this.parentNode.parentNode.querySelector('.pricing-title h3').innerText;
-      const eventPrice = this.parentNode.parentNode.querySelector('.pricing-price').innerText;
-      addToCart(eventTitle, eventPrice);
-    });
+    // Add click event listener to the parent element
+    document.querySelector('.container').addEventListener('click', handleButtonClick);
   });
 
 // Format Card Number
