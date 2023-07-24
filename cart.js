@@ -1,3 +1,29 @@
+// CartButton class representing the cart button with ticket count
+  class CartButton {
+    constructor(element) {
+      this.element = element;
+      this.ticketCount = 0;
+      this.updateTicketCount();
+      this.addClickEvent();
+    }
+
+    updateTicketCount() {
+      this.element.innerHTML = `<div>Cart (${this.ticketCount} Tickets)</div>`;
+    }
+
+    addClickEvent() {
+      this.element.addEventListener('click', () => {
+        // Increment the ticket count and update the text
+        this.ticketCount++;
+        this.updateTicketCount();
+      });
+    }
+  }
+
+  // Initialize the cart button with ticket count functionality
+  const cartButtonElement = document.getElementById('cart-button');
+  const cartButton = new CartButton(cartButtonElement);
+
 // Event class representing each paid or free event
 class Event {
     constructor(name, date, price) {
