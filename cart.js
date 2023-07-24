@@ -1,102 +1,53 @@
-// Define TicketPricing class
-  class TicketPricing {
-    constructor(basePrice) {
-      this.basePrice = basePrice;
-    }
+// Wait for the document to be ready
+document.addEventListener("DOMContentLoaded", function () {
+  const cartItems = []; // To store selected events and prices
 
-    updatePrice(element) {
-      const selectedValue = parseInt(element.value);
-      const priceElement = element.closest(".pricing-box").querySelector(".pricing-price");
-      const totalPrice = this.basePrice * selectedValue;
-      priceElement.textContent = "R" + totalPrice;
+  // Function to display cart items on the cart page
+  function displayCartItems() {
+    const cartItemsDiv = document.getElementById("cart-items");
+    cartItemsDiv.innerHTML = ""; // Clear the previous content
+
+    if (cartItems.length === 0) {
+      cartItemsDiv.innerHTML = "<p>No items in the cart.</p>";
+    } else {
+      cartItems.forEach((item) => {
+        const itemDiv = document.createElement("div");
+        itemDiv.innerHTML = `<p><strong>Event:</strong> ${item.eventName}</p><p><strong>Price:</strong> R${item.eventPrice}</p><hr>`;
+        cartItemsDiv.appendChild(itemDiv);
+      });
     }
   }
 
-  // Wait for the document to be ready
-  document.addEventListener("DOMContentLoaded", function () {
-    // Create instances of TicketPricing for each ticket option
-    const earlyBirdPricing = new TicketPricing(380);
-    const oneDayPricing = new TicketPricing(250);
-    const twoDayPricing = new TicketPricing(600);
-    const fullPricing = new TicketPricing(300);
+  // Function to handle "Buy Ticket" button click event for paid events
+  function handleBuyTicketClick(event) {
+    const pricingBox = event.target.closest(".pricing-box");
+    const eventName = pricingBox.querySelector(".pricing-title h3").textContent;
+    const eventPrice = pricingBox.querySelector(".pricing-price").textContent;
 
-    // Bind event handlers for each pricing element
-    document.querySelectorAll(".required.form-select").forEach((element) => {
-      element.addEventListener("change", function () {
-        switch (element.id) {
-          case "early-bird-person":
-            earlyBirdPricing.updatePrice(element);
-            break;
-          case "1-day-pricing-person":
-            oneDayPricing.updatePrice(element);
-            break;
-          case "2-day-pricing-person":
-            twoDayPricing.updatePrice(element);
-            break;
-          case "full-pricing-person":
-            fullPricing.updatePrice(element);
-            break;
-          default:
-            break;
-        }
-      });
-    });
+    cartItems.push({ eventName, eventPrice });
+    displayCartItems();
+  }
+
+  // Function to handle "Book a Seat" button click event for free events
+  function handleBookSeatClick(event) {
+    const pricingBox = event.target.closest(".pricing-box");
+    const eventName = pricingBox.querySelector(".pricing-title h3").textContent;
+    const eventPrice = pricingBox.querySelector(".pricing-price").textContent;
+
+    cartItems.push({ eventName, eventPrice });
+    displayCartItems();
+  }
+
+  // Attach event listeners to the "Buy Ticket" buttons for each paid event
+  document.querySelectorAll("#paid-events .pricing-action a.button").forEach((button) => {
+    button.addEventListener("click", handleBuyTicketClick);
   });
 
-// Function to handle the "Buy Ticket" button click
-  function handleButtonClick(event) {
-    const selectedEvent = event.target.dataset.event; // Get the selected event details from the data-event attribute
-    const selectedQuantity = parseInt(document.getElementById(`early-bird-person`).value); // Get the selected quantity
-    const totalPrice = calculateTotalPrice(selectedEvent, selectedQuantity);
-
-    // Create a new item with the selected event details and add it to the cart
-    const newItem = {
-      event: selectedEvent,
-      quantity: selectedQuantity,
-      price: totalPrice,
-    };
-
-    // Retrieve existing cart items from localStorage or initialize an empty array
-    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-
-    // Add the new item to the cart
-    cartItems.push(newItem);
-
-    // Save the updated cart items to localStorage
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-
-    // Display success message
-    const successMessage = document.getElementById(`success-message-${selectedEvent}`);
-    successMessage.innerText = `Added ${selectedQuantity} ticket(s) to the cart.`;
-    successMessage.classList.add("text-success");
-
-    // Reset quantity input
-    document.getElementById(`early-bird-person`).value = 1;
-
-    // Update the cart button
-    updateCartButton();
-  }
-
-  // Function to calculate the total price for the selected event and quantity
-  function calculateTotalPrice(event, quantity) {
-    // You can add the logic here to calculate the total price based on the event and quantity
-    // For now, let's assume the price is hardcoded in the data-event attribute
-    const eventPrice = parseFloat(document.getElementById(`early-bird-person`).dataset.price);
-    return eventPrice * quantity;
-  }
-
-  // Function to update the cart button with the total number of items in the cart
-  function updateCartButton() {
-    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    const cartButton = document.getElementById("cart-button");
-    const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
-    cartButton.innerText = `Cart (${cartCount})`;
-  }
-
-  // Call the updateCartButton function when the page loads
-  window.onload = function () {
-    updateCartButton();
-  };
+  // Attach event listeners to the "Book a Seat" buttons for each free event
+  document.querySelectorAll("#free-events .pricing-action a.button").forEach((button) => {
+    button.addEventListener("click", handleBookSeatClick);
+  });
+});
 
 // Format Card Number
         function formatCardNumber() {
