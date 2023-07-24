@@ -1587,6 +1587,7 @@
       !SEMICOLON.Mobile.any() && skrollr.init({ forceHeight: false });
     </script>
     <script src="searchbar.js"></script>
+    <script src="cart.js"></script>
 
     <script>
    // Define TicketPricing class
@@ -1633,61 +1634,6 @@
       });
     });
   });
-
-// Function to handle the "Buy Ticket" button click
-  function handleButtonClick(event) {
-    const selectedEvent = event.target.dataset.event; // Get the selected event details from the data-event attribute
-    const selectedQuantity = parseInt(document.getElementById(`early-bird-person`).value); // Get the selected quantity
-    const totalPrice = calculateTotalPrice(selectedEvent, selectedQuantity);
-
-    // Create a new item with the selected event details and add it to the cart
-    const newItem = {
-      event: selectedEvent,
-      quantity: selectedQuantity,
-      price: totalPrice,
-    };
-
-    // Retrieve existing cart items from localStorage or initialize an empty array
-    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-
-    // Add the new item to the cart
-    cartItems.push(newItem);
-
-    // Save the updated cart items to localStorage
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-
-    // Display success message
-    const successMessage = document.getElementById(`success-message-${selectedEvent}`);
-    successMessage.innerText = `Added ${selectedQuantity} ticket(s) to the cart.`;
-    successMessage.classList.add("text-success");
-
-    // Reset quantity input
-    document.getElementById(`early-bird-person`).value = 1;
-
-    // Update the cart button
-    updateCartButton();
-  }
-
-  // Function to calculate the total price for the selected event and quantity
-  function calculateTotalPrice(event, quantity) {
-    // You can add the logic here to calculate the total price based on the event and quantity
-    // For now, let's assume the price is hardcoded in the data-event attribute
-    const eventPrice = parseFloat(document.getElementById(`early-bird-person`).dataset.price);
-    return eventPrice * quantity;
-  }
-
-  // Function to update the cart button with the total number of items in the cart
-  function updateCartButton() {
-    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    const cartButton = document.getElementById("cart-button");
-    const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
-    cartButton.innerText = `Cart (${cartCount})`;
-  }
-
-  // Call the updateCartButton function when the page loads
-  window.onload = function () {
-    updateCartButton();
-  };
 
     </script>
   </body>
