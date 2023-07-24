@@ -84,7 +84,6 @@ form #cardholder {
   outline: none;
   border: none;
   border-bottom: 2px solid hsl(326, 91%, 50%);
-}
   padding-top: 5px;
   margin-bottom: 20px;
   padding-right: 30px;
@@ -127,7 +126,6 @@ background-color:#fc8b0b;
 #cvv {
   border: none;
   border-bottom: 2px solid hsl(326, 91%, 50%);
-}
   outline: none;
   width: 130px;
   padding-top: 14px;
