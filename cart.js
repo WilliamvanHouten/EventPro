@@ -29,6 +29,29 @@ function redirectToPayment(eventId) {
     window.location.href = `paymentform.html?event=${encodeURIComponent(eventName)}&price=${price}`;
   }
 
+// Function to parse and display event info from the URL parameters
+  function displayEventInfo() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const eventName = urlParams.get("event");
+    const eventPrice = urlParams.get("price");
+
+    const cartItemsContainer = document.getElementById("cart-items");
+
+    // Create elements to display event info
+    const eventNameElement = document.createElement("p");
+    eventNameElement.textContent = `Event Name: ${eventName}`;
+
+    const eventPriceElement = document.createElement("p");
+    eventPriceElement.textContent = `Price: R ${eventPrice}`;
+
+    // Append event info to the cart items container
+    cartItemsContainer.appendChild(eventNameElement);
+    cartItemsContainer.appendChild(eventPriceElement);
+  }
+
+  // Call the displayEventInfo function on page load
+  window.onload = displayEventInfo;
+
 // Format Card Number
         function formatCardNumber() {
             let cardNumberInput = document.getElementById('cardno');
