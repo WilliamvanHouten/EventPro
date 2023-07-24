@@ -9,8 +9,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
 </head>
 <body>
+<!-- cart section -->
+        <!-- Container to display cart items -->
+        <div class="cart-container">
+            <h1>Welcome to your booked ticket section</h1>
+        <div id="cart-content"></div>
+    
+        <!-- Total amount -->
+        <h3 id="total-amount"></h3>
+        </div>
+        <br><br>
     <div class="container">
-        <img src="visa logo.jpg" width="180" height="180" alt="visalogo">
         <span class="close-1">&times;</span>
         <h1 class="payment">Payment Method</h1>
         <form action="#" method="POST" id="paymentForm" class="needs-validation" novalidate>
@@ -44,7 +53,7 @@
                 <p class="address">Payment Address is the same as the Delivery Address</p>
             </label>
             <br>
-            <button id="payButton" class="btn btn-primary" disabled>Pay R250.00</button>
+            <button id="payButton" class="btn btn-primary" >Pay R 0.00</button>
         </form>
     </div>
 

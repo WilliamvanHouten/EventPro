@@ -1,22 +1,33 @@
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 :root {
   --text-color: #000;
+  background-color: #000;
 }
 
 body {
-  display: flex;
+  display: block;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: color #764;
+  font-size: 20px;
+  background-color: #000;
 }
 
+.cart-container {
+  display: block;
+  align-items: center;
+  text-align: center;
+  padding: 30px 15px;
+  font-size: 42px;
+  color: black;
+  background: linear-gradient(#FF6767, #FB0091);
+  border-radius: 20px;
+  box-shadow: 5px 10px 8px 10px #8a497f;
+}
 
+h6 {
+  font-size: 20px;
+  color: var(--text-color);
+}
 
 p {
   margin: -20px 0px 56px 25px;
@@ -24,17 +35,26 @@ p {
   text-transform: none;
 }
 
+form.needs-validation {
+  font-size: 20px;
+  background: whitesmoke;
+  padding: 20px 10px;
+  border-radius: 20px;
+  box-shadow: 5px 10px 8px 10px #632c5a;
+}
+
 button.btn.btn-primary {
   border: none;
   outline: none;
   text-align: center;
   height: 40px;
-  background:hsl(326, 91%, 50%);
-  color: #fff;
-  padding: 10px;
-  font-weight: bold;
-  border-radius:16px;
- 
+  background: #000;
+  color: whitesmoke;
+}
+
+button.btn.btn-primary:hover {
+  background: linear-gradient(#FF6767, #FB0091);
+  box-shadow: 5px 10px 18px #f777d7;
 }
 
 span {
@@ -45,12 +65,20 @@ span {
   color: var(--text-color);
 }
 
-  
+h1.payment {
+  padding: 30px 15px;
+  font-size: 42px;
+  color: black;
+  background: linear-gradient(#FF6767, #FB0091);
+  border-radius: 20px;
+  box-shadow: 5px 10px 8px 10px #632c5a;
+}
+
 form label {
-  color:#15133C;
+  color: #15133C;
   text-transform: uppercase;
   position: relative;
-  font-size: 10px;
+  font-size: 15px;
   word-spacing: 4px;
 }
 
@@ -59,15 +87,8 @@ form select {
   outline: none;
   border: none;
   border-bottom: 2px solid hsl(326, 91%, 50%);
-  text-transform: capitalize;
-  padding-top: 3px;
-  color: var(--text-color);
-  padding-bottom: 3px;
-  font-size: 18px;
-  margin-left: -3px;
-  margin-bottom: 20px;
-  background-color: transparent;
 }
+
 
 form #cardno,
 form #cardholder {
@@ -75,14 +96,6 @@ form #cardholder {
   outline: none;
   border: none;
   border-bottom: 2px solid hsl(326, 91%, 50%);
-  padding-top: 5px;
-  margin-bottom: 20px;
-  padding-right: 30px;
-  color:#15133C;
-  font-size: 18px;
-  background-color: transparent;
-  padding-bottom: 5px;
-  border-radius: 16px;
 }
 
 .float {
@@ -90,9 +103,11 @@ form #cardholder {
 }
 
 .container {
+  display: block;
   width: 100%;
   max-width: 400px;
-  background: lightyellow;
+  background: #FB0091;
+  box-shadow: 5px 10px 18px #FF6767;
   padding: 30px;
   position: relative;
   display: flex;
@@ -100,6 +115,7 @@ form #cardholder {
   align-items: center;
   border-radius: 16px;
 }
+
 .error-message {
   color: red;
   display: none;
@@ -108,21 +124,13 @@ form #cardholder {
 .is-invalid {
   border-color: red;
 }
-.close{
-background-color:#fc8b0b;
+
+.close {
+  background-color: #fc8b0b;
 }
-.address{color:hsl(326, 91%, 50%)}
 
 #validtill,
 #cvv {
   border: none;
   border-bottom: 2px solid hsl(326, 91%, 50%);
-  outline: none;
-  width: 130px;
-  padding-top: 14px;
-  margin-bottom: 56px;
-  color: var(--text-color);
-  background-color: transparent;
-  font-size: 18px;
 }
-button.btn.btn-primary:hover {color: silver;}
