@@ -121,6 +121,7 @@ form #cardholder {
 .close{
 background-color:#fc8b0b;
 }
+.address{color:hsl(326, 91%, 50%)}
 
 #validtill,
 #cvv {
