@@ -1,33 +1,43 @@
-class EventCart {
-      constructor() {
-        this.cartItems = [];
-      }
+function addToCart(eventTitle, eventPrice) {
+    const cartContent = document.getElementById('cart-content');
 
-      addToCart(eventName, price, numberOfTickets) {
-        this.cartItems.push({
-          eventName: eventName,
-          price: price,
-          numberOfTickets: numberOfTickets
-        });
-        this.updateCartButton();
-      }
+    // Create a new div element to hold the event information
+    const eventInfo = document.createElement('div');
+    eventInfo.classList.add('event-info');
 
-      updateCartButton() {
-        const cartButton = document.getElementById("cartButton");
-        const cartTotal = this.cartItems.reduce((total, item) => total + item.numberOfTickets, 0);
-        cartButton.innerText = `Cart (${cartTotal})`;
-      }
-    }
+    // Add the event title and price to the eventInfo div
+    const titleElement = document.createElement('h2');
+    titleElement.innerText = eventTitle;
 
-    // Create an instance of EventCart
-    const eventCart = new EventCart();
+    const priceElement = document.createElement('p');
+    priceElement.innerText = 'Price: ' + eventPrice;
 
-    // Function called when Buy Ticket button is clicked
-    function addToCart(eventName, price, selectId) {
-      const selectElement = document.getElementById(selectId);
-      const numberOfTickets = parseInt(selectElement.value, 10);
-      eventCart.addToCart(eventName, price * numberOfTickets, numberOfTickets);
-    }
+    eventInfo.appendChild(titleElement);
+    eventInfo.appendChild(priceElement);
+
+    // Append the eventInfo to the cartContent div
+    cartContent.appendChild(eventInfo);
+  }
+
+  // Add event listeners to Buy Ticket buttons
+  const buyTicketButtons = document.querySelectorAll('.pricing-action button');
+  buyTicketButtons.forEach((button) => {
+    button.addEventListener('click', function () {
+      const eventTitle = this.parentNode.parentNode.querySelector('.pricing-title h3').innerText;
+      const eventPrice = this.parentNode.parentNode.querySelector('.pricing-price').innerText;
+      addToCart(eventTitle, eventPrice);
+    });
+  });
+
+  // Add event listeners to Book a Seat buttons
+  const bookSeatButtons = document.querySelectorAll('.pricing-action button');
+  bookSeatButtons.forEach((button) => {
+    button.addEventListener('click', function () {
+      const eventTitle = this.parentNode.parentNode.querySelector('.pricing-title h3').innerText;
+      const eventPrice = this.parentNode.parentNode.querySelector('.pricing-price').innerText;
+      addToCart(eventTitle, eventPrice);
+    });
+  });
 
 // Format Card Number
         function formatCardNumber() {
