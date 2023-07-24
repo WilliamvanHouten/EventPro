@@ -1,4 +1,4 @@
- // Event class to represent an event with its name and price
+  // Event class to represent an event with its name and price
   class Event {
     constructor(id, name, price) {
       this.id = id;
@@ -144,10 +144,23 @@
   // Call the displayEventInfo function on page load
   window.onload = displayEventInfo;
 
-  // Event Listeners
-  document.getElementById('cardno').addEventListener('input', () => paymentForm.formatCardNumber());
-  document.getElementById('validtill').addEventListener('input', () => paymentForm.formatExpirationDate());
-  document.getElementById('cardholder').addEventListener('input', () => paymentForm.validateCardholderName());
+  // Function to book a free seat and display event information in paymentform.html
+  function bookFreeSeat(eventId) {
+    // Store the selected event information in localStorage
+    EventData.storeEventInfo(eventId);
+
+    // Show a success message
+    const selectedEvent = EventData.getEvents().find(event => event.id === eventId);
+    alert(`You have successfully booked a seat for ${selectedEvent.name}. The event is free to join.`);
+
+    // Redirect to paymentform.html
+    window.location.href = "paymentform.html";
+  }
+
+  // Event Listeners for buttons
+  document.getElementById('book-button-1').addEventListener('click', () => bookFreeSeat(1));
+  document.getElementById('book-button-2').addEventListener('click', () => bookFreeSeat(2));
+  document.getElementById('book-button-3').addEventListener('click', () => bookFreeSeat(3));
+  document.getElementById('book-button-4').addEventListener('click', () => bookFreeSeat(4));
 
   const paymentForm = new PaymentForm();
-
