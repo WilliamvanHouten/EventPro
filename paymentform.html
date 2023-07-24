@@ -87,11 +87,10 @@
     <!-- Custom JavaScript -->
     <script src ="cart.js"></script>
     <script>
-        // Function to parse and display event info from the URL parameters
+// Function to parse and display event info from the URL parameters
   function displayEventInfo() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const eventName = urlParams.get("event");
-    const eventPrice = urlParams.get("price");
+    const eventName = localStorage.getItem("selectedEventName");
+    const eventPrice = localStorage.getItem("selectedEventPrice");
 
     const cartItemsContainer = document.getElementById("cart-items");
 
@@ -109,6 +108,8 @@
 
   // Call the displayEventInfo function on page load
   window.onload = displayEventInfo;
+
+  
     </script>
 </body>
 </html>
