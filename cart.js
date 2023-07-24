@@ -1,39 +1,57 @@
-document.addEventListener('DOMContentLoaded', function () {
-    // Function to add event info to cart
-    function addToCart(eventTitle, eventPrice) {
-      const cartContent = document.getElementById('cart-content');
+// Function to handle the "Buy Ticket" button click
+  function handleButtonClick(event) {
+    const selectedEvent = event.target.dataset.event; // Get the selected event details from the data-event attribute
+    const selectedQuantity = parseInt(document.getElementById(`early-bird-person`).value); // Get the selected quantity
+    const totalPrice = calculateTotalPrice(selectedEvent, selectedQuantity);
 
-      // Create a new div element to hold the event information
-      const eventInfo = document.createElement('div');
-      eventInfo.classList.add('event-info');
+    // Create a new item with the selected event details and add it to the cart
+    const newItem = {
+      event: selectedEvent,
+      quantity: selectedQuantity,
+      price: totalPrice,
+    };
 
-      // Add the event title and price to the eventInfo div
-      const titleElement = document.createElement('h2');
-      titleElement.innerText = eventTitle;
+    // Retrieve existing cart items from localStorage or initialize an empty array
+    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
 
-      const priceElement = document.createElement('p');
-      priceElement.innerText = 'Price: ' + eventPrice;
+    // Add the new item to the cart
+    cartItems.push(newItem);
 
-      eventInfo.appendChild(titleElement);
-      eventInfo.appendChild(priceElement);
+    // Save the updated cart items to localStorage
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
 
-      // Append the eventInfo to the cartContent div
-      cartContent.appendChild(eventInfo);
-    }
+    // Display success message
+    const successMessage = document.getElementById(`success-message-${selectedEvent}`);
+    successMessage.innerText = `Added ${selectedQuantity} ticket(s) to the cart.`;
+    successMessage.classList.add("text-success");
 
-    // Function to handle click events on Buy Ticket and Book a Seat buttons
-    function handleButtonClick(event) {
-      if (event.target.matches('.button-gradient')) {
-        const eventBox = event.target.closest('.pricing-box');
-        const eventTitle = eventBox.querySelector('.pricing-title h3').innerText;
-        const eventPrice = eventBox.querySelector('.pricing-price').innerText;
-        addToCart(eventTitle, eventPrice);
-      }
-    }
+    // Reset quantity input
+    document.getElementById(`early-bird-person`).value = 1;
 
-    // Add click event listener to the parent element
-    document.querySelector('.container').addEventListener('click', handleButtonClick);
-  });
+    // Update the cart button
+    updateCartButton();
+  }
+
+  // Function to calculate the total price for the selected event and quantity
+  function calculateTotalPrice(event, quantity) {
+    // You can add the logic here to calculate the total price based on the event and quantity
+    // For now, let's assume the price is hardcoded in the data-event attribute
+    const eventPrice = parseFloat(document.getElementById(`early-bird-person`).dataset.price);
+    return eventPrice * quantity;
+  }
+
+  // Function to update the cart button with the total number of items in the cart
+  function updateCartButton() {
+    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    const cartButton = document.getElementById("cart-button");
+    const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+    cartButton.innerText = `Cart (${cartCount})`;
+  }
+
+  // Call the updateCartButton function when the page loads
+  window.onload = function () {
+    updateCartButton();
+  };
 
 // Format Card Number
         function formatCardNumber() {
