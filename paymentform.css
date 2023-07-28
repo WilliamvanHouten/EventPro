@@ -113,24 +113,4 @@ form #cardholder {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 16px;
-}
-
-.error-message {
-  color: red;
-  display: none;
-}
-
-.is-invalid {
-  border-color: red;
-}
-
-.close {
-  background-color: #fc8b0b;
-}
-
-#validtill,
-#cvv {
-  border: none;
-  border-bottom: 2px solid hsl(326, 91%, 50%);
-}
+  boborder-r
